@@ -164,6 +164,7 @@ const useFetchData = <T extends RequestData<any>>(
   }, effects);
 
   return {
+    setDataSource: setList,
     dataSource: list,
     loading,
     reload: async () => fetchListDebounce.run(),

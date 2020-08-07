@@ -709,6 +709,10 @@ const ProTable = <T extends {}, U extends object>(
    */
   useEffect(() => {
     const userAction: ActionType = {
+      setDataSource : (value : any)=>{
+         action.setDataSource(value)
+      },
+      getDataSource: ()=>action.dataSource,
       reload: async (resetPageIndex?: boolean) => {
         const {
           action: { current },

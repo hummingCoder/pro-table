@@ -5,9 +5,12 @@ export interface RequestData<T> {
   data: T[];
   success?: boolean;
   total?: number;
+
   [key: string]: any;
 }
+
 export interface UseFetchDataAction<T extends RequestData<any>> {
+  setDataSource: (value: any) => void;
   dataSource: T['data'] | T;
   loading: boolean | undefined;
   hasMore: boolean;

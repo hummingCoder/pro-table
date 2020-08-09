@@ -39,6 +39,8 @@ import ErrorBoundary from './component/ErrorBoundary';
 type TableRowSelection = TableProps<any>['rowSelection'];
 
 export interface ActionType {
+  setDataSource: (value: any) => void;
+  getDataSource: () => any;
   reload: (resetPageIndex?: boolean) => void;
   reloadAndRest: () => void;
   fetchMore: () => void;
@@ -709,10 +711,10 @@ const ProTable = <T extends {}, U extends object>(
    */
   useEffect(() => {
     const userAction: ActionType = {
-      setDataSource : (value : any)=>{
-         action.setDataSource(value)
+      setDataSource: (value: any) => {
+        action.setDataSource(value);
       },
-      getDataSource: ()=>action.dataSource,
+      getDataSource: () => action.dataSource,
       reload: async (resetPageIndex?: boolean) => {
         const {
           action: { current },
@@ -771,11 +773,8 @@ const ProTable = <T extends {}, U extends object>(
     if (actionRef && typeof actionRef !== 'function') {
       actionRef.current = userAction;
     }
-  }, []);
+  }, [action]);
 
-  /**
-   * Table Column 变化的时候更新一下，这个参数将会用于渲染
-   */
   useDeepCompareEffect(() => {
     const tableColumn = genColumnList<T>(
       propsColumns,
